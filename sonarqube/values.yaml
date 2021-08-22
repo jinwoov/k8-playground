@@ -1,0 +1,35 @@
+image:
+  name: sonarqube
+  tag: community
+  imagePullPolicy: Always
+
+namespace: sonarqube
+replicas: 1
+
+port:
+  containerPort: 9000
+  protocol: TCP
+
+secretName: postgresSecret
+
+livenessProbe:
+  httpGet: 
+    path: /healthz
+    port: 9000
+  initialDelaySeconds: 60
+  timeoutSeconds: 5
+readinessProbe:
+  httpGet: 
+    path: /healthz
+    port: 9000
+  port: 9000
+  initialDelaySeconds: 60
+  timeoutSeconds: 5
+
+resources:
+  limits:
+    cpu: 1
+    memory: 128Mi
+  requests:
+    cpu: 250m
+    memory: 64Mi

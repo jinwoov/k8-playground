@@ -24,6 +24,12 @@ spec:
           - secretRef:
               naem: {{ .Values.secretName }}
         livenessProbe:
-          tcpSocket: 
-            port: {{ .Values.livenessProbe.port }}
-          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+{{ toYaml .Values.livenessProbe | include 12 }}
+        readinessProbe:
+{{ toYaml .Values.readinessProbe | include 12 }}
+        ports:
+          - name: http
+            containerPort: {{ .Values.port.containerPort }}
+            protocol: {{ .Values.port.protocol }}
+        resources:
+{{ toYaml .Values.resources | include 12 }}
