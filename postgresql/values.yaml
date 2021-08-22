@@ -1,0 +1,15 @@
+image:
+  name: postgres
+  tag: alpine3.14
+  imagePullPolicy: Always
+
+replicas: 1
+
+port:
+  containerPort: 8080
+
+secretName: postgresSecret
+
+livenessProbe:
+  port: 8080
+  initialDelaySeconds: 60
