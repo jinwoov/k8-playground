@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Chart.Name }}
+  namespace: {{ .Chart.Name }}
   labels:
     app: {{ .Chart.Name }}
 spec:
@@ -20,16 +21,16 @@ spec:
         imagePullPolicy: {{ .Values.image.imagePullPolicy }}
         ports:
         - containerPort: {{ .Values.port.containerPort }}
-        envFrom:
-          - secretRef:
-              naem: {{ .Values.secretName }}
+        # envFrom:
+        #   - secretRef:
+        #       name: {{ .Values.secretName }}
         livenessProbe:
-{{ toYaml .Values.livenessProbe | include 12 }}
+{{ toYaml .Values.livenessProbe | nindent 12 }}
         readinessProbe:
-{{ toYaml .Values.readinessProbe | include 12 }}
+{{ toYaml .Values.readinessProbe | nindent 12 }}
         ports:
           - name: http
             containerPort: {{ .Values.port.containerPort }}
             protocol: {{ .Values.port.protocol }}
         resources:
-{{ toYaml .Values.resources | include 12 }}
+{{ toYaml .Values.resources | nindent 12 }}

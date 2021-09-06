@@ -10,7 +10,7 @@ port:
   containerPort: 9000
   protocol: TCP
 
-secretName: postgresSecret
+secretName: postgre-secret
 
 livenessProbe:
   httpGet: 
@@ -22,7 +22,6 @@ readinessProbe:
   httpGet: 
     path: /healthz
     port: 9000
-  port: 9000
   initialDelaySeconds: 60
   timeoutSeconds: 5
 
