@@ -1,0 +1,16 @@
+Deploying {{ .Chart.Name }} in your cluster
+
+If you are trying this out locally you would need to define secret within your cluster
+
+Please inject environment variable with PSQL with username and password
+
+Follow this format:
+
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: psql-settings
+      namespace: {{ .Values.namespace }}
+    data:
+      SONAR_JDBC_USERNAME: base64 value of PSQL username
+      SONAR_JDBC_PASSWORD: base64 value of PSQL password

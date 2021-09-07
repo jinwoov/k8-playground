@@ -4,6 +4,7 @@ metadata:
   namespace: {{ .Chart.Name }}
   labels:
     app: {{ .Chart.Name }}
+    {{- include "sonarqube.labels" . | nindent 4 }}
   name: {{ .Chart.Name }}
 spec:
   selector:
@@ -12,4 +13,7 @@ spec:
   - protocol: {{ .Values.port.protocol }}
     targetPort: {{ .Values.port.containerPort }}
     port: {{ .Values.port.containerPort }}
-    
+{{ if (.Values.localDevelopment.development) }}
+    nodePort: {{ .Values.localDevelopment.port }}
+  type: {{ .Values.localDevelopment.type }}
+{{ end }}

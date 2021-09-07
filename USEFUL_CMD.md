@@ -8,4 +8,7 @@ helm search repo bitnami
 helm install my-release bitnami/<chart>
 
 
+## increase docker desktop k8 memory
+wsl -d docker-desktop
+sysctl -w vm.max_map_count=262144
 ```

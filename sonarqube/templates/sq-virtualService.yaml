@@ -1,0 +1,17 @@
+# apiVersion: networking.istio.io/v1alpha3
+# kind: VirtualService
+# metadata:
+#   name: {{ .Chart.Name }}-vs
+#   namespace: {{ .Values.namespace }}
+# spec:
+#   http:
+#   - name: "{{ .Chart.Name }}-vs"
+#     match:
+#     - uri:
+#         prefix: "/sonarqube"
+#     rewrite:
+#       uri: "/"
+#     route:
+#     - destination:
+#         host: "{{ .Chart.Name }}.{{ .Values.namespace }}.svc.cluster.local"
+#         subset: v1

@@ -10,7 +10,7 @@ port:
   containerPort: 9000
   protocol: TCP
 
-secretName: postgre-secret
+secretName: psql-settings
 
 livenessProbe:
   httpGet: 
@@ -28,7 +28,16 @@ readinessProbe:
 resources:
   limits:
     cpu: 1
-    memory: 128Mi
+    memory: 2.5Gi
   requests:
     cpu: 250m
-    memory: 64Mi
+    memory: 500Mi
+
+localDevelopment: 
+  development: true
+  port: 30080
+  type: NodePort
+
+
+db:
+  fqdn: jdbc:postgresql://postgresql.postgres.svc.cluster.local:5432/

@@ -5,6 +5,7 @@ metadata:
   namespace: {{ .Chart.Name }}
   labels:
     app: {{ .Chart.Name }}
+    {{- include "sonarqube.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
@@ -21,9 +22,12 @@ spec:
         imagePullPolicy: {{ .Values.image.imagePullPolicy }}
         ports:
         - containerPort: {{ .Values.port.containerPort }}
-        # envFrom:
-        #   - secretRef:
-        #       name: {{ .Values.secretName }}
+        envFrom:
+        - secretRef:
+            name: {{ .Values.secretName }}
+        env:
+        - name: SONAR_JDBC_URL
+          value: {{ .Values.db.fqdn }}
         livenessProbe:
 {{ toYaml .Values.livenessProbe | nindent 12 }}
         readinessProbe:
