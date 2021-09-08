@@ -1,0 +1,44 @@
+image:
+  name: jenkins/jenkins
+  tag: jdk11
+  imagePullPolicy: Always
+
+namespace: jenkins
+replicas: 1
+
+port:
+  containerPort: 8080
+  anotherPort: 50000
+  protocol: TCP
+
+# secretName: jenkins-settings
+
+livenessProbe:
+  tcpSocket: 
+    port: 8080
+  initialDelaySeconds: 60
+  timeoutSeconds: 5
+readinessProbe:
+  tcpSocket: 
+    port: 8080
+  initialDelaySeconds: 60
+  timeoutSeconds: 5
+
+resources:
+  limits:
+    cpu: 3
+    memory: 5Gi
+  requests:
+    cpu: 250m
+    memory: 500Mi
+
+localDevelopment: 
+  development: true
+  port: 30082
+  type: NodePort
+
+hostPath: /var/jenkins_home
+
+securityContext:
+  runAsUser: 0
+  fsGroup: 1000

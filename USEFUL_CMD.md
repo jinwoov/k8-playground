@@ -5,6 +5,8 @@ kubectl label namespace sonarqube istio-injection=enabled --overwrite
 
 kubectl label namespace splunk istio-injection=enabled --overwrite
 
+kubectl label namespace jenkins istio-injection=enabled --overwrite
+
 
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm search repo bitnami

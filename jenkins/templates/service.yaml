@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Chart.Name }}
+  labels:
+    app: {{ .Chart.Name }}
+    {{- include "jenkins.labels" . | nindent 4 }}
+  name: {{ .Chart.Name }}
+spec:
+  selector:
+    app: {{ .Chart.Name }}
+  ports:
+  - name: another-port
+    protocol: {{ .Values.port.protocol }}
+    targetPort: {{ .Values.port.anotherPort }}
+    port: {{ .Values.port.anotherPort }}
+  - name: http
+    protocol: {{ .Values.port.protocol }}
+    targetPort: {{ .Values.port.containerPort }}
+    port: {{ .Values.port.containerPort }}
+{{ if (.Values.localDevelopment.development) }}
+    nodePort: {{ .Values.localDevelopment.port }}
+  type: {{ .Values.localDevelopment.type }}
+{{ end }}
