@@ -16,4 +16,5 @@ helm install my-release bitnami/<chart>
 ## increase docker desktop k8 memory
 wsl -d docker-desktop
 sysctl -w vm.max_map_count=262144
+https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html
 ```
